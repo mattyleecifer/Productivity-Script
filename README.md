@@ -1,2 +1,14 @@
 # Productivity-Script
 A simple productivity script designed for Windows keyboard written in AHK
+
+This is a simple productivity script I've written for myself in AHK.
+
+Hotkeys are used to tag and later select different windows.
+
+There is a little notepad included as well, which you can quickly pop-out into Notepad and save.
+
+Commands:
+Hit Windows+Q (W, E, A, S) to 'tag' a window
+Hit Alt+Q (W, E, A, S) to bring up the tagged window
+Alt-C will bring up the notepad
+Press 'Pop Out' in the notepad to save text 
