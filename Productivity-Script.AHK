@@ -16,17 +16,6 @@ gui, main:add, edit,w790 h500 ys wrap vtempnotes
 gui, main:show, w880 h510
 return
 
-f3::
-newclip =
-newclip = %Clipboard% 
-Clipboard = %newclip%
-send ^v
-return
-
-`::
-send ^c
-return
-
 !a::
 WinActivate, ahk_id %leftscreen%
 return
