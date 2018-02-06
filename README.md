@@ -1,7 +1,7 @@
 # Productivity-Script
-A simple productivity script designed for Windows keyboard written in AHK
+A simple productivity script designed for Windows keyboard written in AHK.
 
-This is a simple productivity script I've written for myself in AHK.
+No need for compilation, just install AHK and run script.
 
 Hotkeys are used to tag and later select different windows.
 
