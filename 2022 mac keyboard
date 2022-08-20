@@ -1,0 +1,119 @@
+SetWorkingDir %A_ScriptDir%
+
+orderdetails =
+topleft =
+topright =
+bottomleft =
+bottomright =
+rightscreen =
+leftscreen =
+
+
+
+;main program
+gui, font, s10
+gui, add, button, gpopout, Popout
+gui, font, s10
+gui, add, button, gexitapp, Exit
+gui, add, edit,w790 h150 ys wrap veditclip
+gui, add, edit,w790 h300 wrap vtempnotes
+gui, show, w880 h510
+return
+
+
+f1::
+send ^c
+newclip = %Clipboard%
+GuiControl, ,editclip, %newclip%
+return
+
+f2:: 
+GuiControlGet, editclip
+Clipboard = %editclip%
+send ^v
+return
+
+f3:: 
+GuiControlGet, tempnotes
+Clipboard = %tempnotes%
+send ^v
+return
+
+
+#a::
+WinActivate, ahk_id %leftscreen%
+return
+
+#s::
+WinActivate, ahk_id %rightscreen%
+return
+
+#q::
+WinActivate, ahk_id %topleft%
+return
+
+#w::
+WinActivate, ahk_id %topright%
+return
+
+#e::
+WinActivate, ahk_id %bottomleft%
+return
+
+#+w::
+WinActivate, ahk_id %bottomright%
+return
+
+#x::
+WinActivate, ahk_id %secondorder%
+return
+
+
+!x::
+WinGet, secondorder, ID, A
+return
+
+!q::
+WinGet, topleft, ID, A
+return
+
+!w::
+WinGet, topright, ID, A
+return
+
+!+w::
+WinGet, bottomright, ID, A
+return
+
+!e::
+WinGet, bottomleft, ID, A
+return
+
+!a::
+WinGet, leftscreen, ID, A
+return
+
+!s::
+WinGet, rightscreen, ID, A
+return
+
+!c::
+WinActivate, Productivity-Script.AHK
+return
+
+
+popout:
+filedelete tempnotes.txt
+gui, submit, nohide
+FileAppend,
+(
+%tempnotes%
+),tempnotes.txt
+run notepad.exe tempnotes.txt
+return
+
+exitapp:
+DetectHiddenWindows,on
+exitapp
+return
+
