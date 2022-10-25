@@ -21,22 +21,68 @@ gui, show, w880 h510
 return
 
 
+; f1::
+; send ^c
+; newclip = %Clipboard%
+; GuiControl, ,editclip, %newclip%
+; return
+
+; f2:: 
+; GuiControlGet, editclip
+; Clipboard = %editclip%
+; send ^v
+; return
+
+; f3:: 
+; GuiControlGet, tempnotes
+; Clipboard = %tempnotes%
+; send ^v
+; return
 f1::
-send ^c
-newclip = %Clipboard%
-GuiControl, ,editclip, %newclip%
+if(RegExMatch(Clipboard, ".+? <", out_var))
+   StringReplace, out_var, out_var, <, , All
+;    MsgBox, % out_var
+   StringSplit, OutputArray, out_var, %A_Space%
+   wordcount := OutputArray0 - 2
+   firstname := ""
+   Loop, %wordcount%
+    {   
+        varblah := OutputArray%A_Index%
+        firstname = %firstname% %varblah%
+    }
+;    MsgBox, % firstname
+    send %firstname%
 return
 
-f2:: 
-GuiControlGet, editclip
-Clipboard = %editclip%
-send ^v
+
+f2::
+if(RegExMatch(Clipboard, " \w+? <", out_var))
+   StringReplace, out_var, out_var, %A_Space%, , All
+   StringReplace, out_var, out_var, <, , All
+
+;    MsgBox, % out_var
+   send %out_var%
+; else
+;    MsgBox, % "Failed to match!"
 return
 
-f3:: 
-GuiControlGet, tempnotes
-Clipboard = %tempnotes%
-send ^v
+
+; email
+f3::
+if(RegExMatch(Clipboard, "<.+?>", out_var))
+   StringReplace, out_var, out_var, <, , All
+   StringReplace, out_var, out_var, >, , All
+;    MsgBox, % out_var
+   send %out_var%
+return
+
+
+; company
+f4::
+if(RegExMatch(Clipboard, "@(.+?)\.", out_var))
+   StringReplace, out_var, out_var, @, , All
+   StringReplace, out_var, out_var, ., , All
+   send %out_var%
 return
 
 
@@ -64,12 +110,16 @@ return
 WinActivate, ahk_id %bottomright%
 return
 
-#x::
+#r::
 WinActivate, ahk_id %secondorder%
 return
 
+#d::
+WinActivate, Productivity-Script.AHK
+return
 
-!x::
+
+!r::
 WinGet, secondorder, ID, A
 return
 
@@ -97,9 +147,7 @@ return
 WinGet, rightscreen, ID, A
 return
 
-!c::
-WinActivate, Productivity-Script.AHK
-return
+
 
 
 popout:
@@ -116,4 +164,29 @@ exitapp:
 DetectHiddenWindows,on
 exitapp
 return
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
